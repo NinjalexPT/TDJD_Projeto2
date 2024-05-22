@@ -85,9 +85,6 @@
 /processorParam:TextureFormat=Color
 /build:Buttons/play.png
 
-#begin Fonts/charybdis.ttf
-/copy:Fonts/charybdis.ttf
-
 #begin Fonts/charybdis_big.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -101,6 +98,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Fonts/charybdis_normal.spritefont
+
+#begin Fonts/charybdis.ttf
+/copy:Fonts/charybdis.ttf
 
 #begin Fonts/Hud.spritefont
 /importer:FontDescriptionImporter
@@ -351,6 +351,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Storyboards/storystart4.png
+
+#begin Tiles/E.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Tiles/E.png
 
 #begin Tiles/F.png
 /importer:TextureImporter

@@ -134,6 +134,8 @@ namespace TDJD_Projeto2.Scripts.Managers
                     return NewTile("Tiles/S", CollisionType.block);
                 case 'T':
                     return NewTile("Tiles/T", CollisionType.block);
+                case 'E':
+                    return NewTile("Tiles/E", CollisionType.block);
 
                 // preenche com inimigo
                 case 'V':
