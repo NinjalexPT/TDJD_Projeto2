@@ -262,6 +262,8 @@ namespace TDJD_Projeto2.Scripts.Managers
         {
             foreach (Enemy enemy in enemies)
             {
+                enemy.Update();
+
                 // se o jogador tocar num inimigo
                 if (enemy.Collider.Intersects(Player.Collider))
                 {

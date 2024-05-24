@@ -84,8 +84,7 @@ namespace TDJD_Projeto2.Scripts.Scenes
                 List<Image> storyboards = new List<Image>()
                 {
                     new Image(Game1._content.Load<Texture2D>("Storyboards/storyend1"), new Vector2(0, 0)),
-                    new Image(Game1._content.Load<Texture2D>("Storyboards/storyend2"), new Vector2(0, 0)),
-                    new Image(Game1._content.Load<Texture2D>("Storyboards/storyend3"), new Vector2(0, 0)),
+                   
                 };
 
                 SceneType nextSceneType = SceneType.MainMenu;
@@ -230,10 +229,10 @@ namespace TDJD_Projeto2.Scripts.Scenes
 
             int xPosition = (int)camera.Center.X - 500;//1120 1024 464
 
-            Label labelTime = new Label("Fonts/Hud", timeText, new Vector2(xPosition, 0f), Color.Yellow);
+            Label labelTime = new Label("Fonts/Hud", timeText, new Vector2(xPosition, 0f), Color.Black);
             labelTime.Draw();
 
-            Label labelScore = new Label("Fonts/Hud", scoreText, new Vector2(xPosition, 25f), Color.Yellow);
+            Label labelScore = new Label("Fonts/Hud", scoreText, new Vector2(xPosition, 25f), Color.Black);
             labelScore.Draw();
         }
 

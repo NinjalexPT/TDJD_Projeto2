@@ -74,9 +74,10 @@ namespace TDJD_Projeto2.Scripts.Scenes
         /// </summary>
         private void LoadButtons()
         {
-            Texture2D creditsButton_texture = Game1._content.Load<Texture2D>("Buttons/credits");
+           
             Texture2D playGameButton_texture = Game1._content.Load<Texture2D>("Buttons/play");
             Texture2D quitGameButton_texture = Game1._content.Load<Texture2D>("Buttons/exit");
+            Texture2D creditsButton_texture = Game1._content.Load<Texture2D>("Buttons/credits");
 
             SpriteFont buttonFont_normal = Game1._content.Load<SpriteFont>("Fonts/charybdis_normal");
             SpriteFont buttonFont_big = Game1._content.Load<SpriteFont>("Fonts/charybdis_big");
@@ -117,15 +118,17 @@ namespace TDJD_Projeto2.Scripts.Scenes
         /// </summary>
         private void CreditsButton_Click(object sender, EventArgs e)
         {
-            string text = "OMG Zombies\n\n" +
+            string text = "Supply Run\n\n" +
                 "Jogo produzido no âmbito da unidade curricular\n" +
                 "'Técnicas de Desenvolvimento de Vídeojogos',\n" +
                 "realizado no Instituto Politécnico do Cávado e do Ave.\n\n" +
                 "Desenvolvedores:\n" +
-                "- Ademar Valente\n" +
-                "- Luís Pereira\n\n" +
-                "Barcelos, Maio 2022\n\n" +
-                "© Todos os direitos reservados.";
+                "- Miguel Silva\n" +
+                "- Hugo Oliveira\n" +
+                "- Samuel Furtado\n\n" +
+                "Barcelos, Maio 2024\n\n" +
+                "Pressiona espaço para voltar";
+                
 
             Game1._currentSceneType = SceneType.Credits;
             Game1._currentScene = new Credits(game, text);
@@ -139,9 +142,7 @@ namespace TDJD_Projeto2.Scripts.Scenes
             List<Image> storyboards = new List<Image>()
             {
                 new Image(Game1._content.Load<Texture2D>("Storyboards/storystart1"), new Vector2(0, 0)),
-                new Image(Game1._content.Load<Texture2D>("Storyboards/storystart2"), new Vector2(0, 0)),
-                new Image(Game1._content.Load<Texture2D>("Storyboards/storystart3"), new Vector2(0, 0)),
-                new Image(Game1._content.Load<Texture2D>("Storyboards/storystart4"), new Vector2(0, 0))
+              
             };
 
             SceneType nextSceneType = SceneType.Gameplay;

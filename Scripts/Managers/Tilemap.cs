@@ -124,14 +124,7 @@ namespace TDJD_Projeto2.Scripts.Managers
                     return NewEmptyTile(CollisionType.transparent);
 
                 // preenche com tile do tipo bloco
-                case 'R':
-                    return NewTile("Tiles/R", CollisionType.block);
-                case 'L':
-                    return NewTile("Tiles/L", CollisionType.block);
-                case 'M':
-                    return NewTile("Tiles/M", CollisionType.block);
-                case 'S':
-                    return NewTile("Tiles/S", CollisionType.block);
+
                 case 'T':
                     return NewTile("Tiles/T", CollisionType.block);
                 case 'E':
@@ -143,15 +136,11 @@ namespace TDJD_Projeto2.Scripts.Managers
                     return NewEmptyTile(CollisionType.transparent);
 
                 // preenche com poção
-                case 'G': // amarela
-                    level.CreatePotion(GetTileCollider(x, y), "G");
-                    return NewEmptyTile(CollisionType.transparent);
+
                 case 'P': // azul
                     level.CreatePotion(GetTileCollider(x, y), "P");
                     return NewEmptyTile(CollisionType.transparent);
-                case 'W': // vermelha
-                    level.CreatePotion(GetTileCollider(x, y), "W");
-                    return NewEmptyTile(CollisionType.transparent);
+;
 
                 // Coloca o jogador na posição inicial
                 case 'I':
