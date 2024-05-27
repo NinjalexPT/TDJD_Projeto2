@@ -6,9 +6,7 @@ using TDJD_Projeto2.Scripts.Utils;
 
 namespace TDJD_Projeto2
 {
-    /// <summary>
-    /// Jogo inspirado no jogo: https://github.com/MonoGame/MonoGame.Samples
-    /// </summary>
+    
     public class Game1 : Game
     {
         #region Campos e propriedades

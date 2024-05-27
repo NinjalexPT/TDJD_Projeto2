@@ -7,6 +7,7 @@ using TDJD_Projeto2.Scripts.Managers;
 using TDJD_Projeto2.Scripts.Scenes;
 using TDJD_Projeto2.Scripts.Utils;
 using System;
+using System.Collections.Generic;
 
 namespace TDJD_Projeto2.Scripts.Sprites
 {
@@ -16,6 +17,11 @@ namespace TDJD_Projeto2.Scripts.Sprites
     public class Player
     {
         #region Campos e propriedes
+
+        private Texture2D bulletTexture;
+        private List<Bullet> bullets;
+        private MouseState currentMouseState;
+        private MouseState previousMouseState;
 
         // o nível atual
         public Level Level
@@ -145,6 +151,11 @@ namespace TDJD_Projeto2.Scripts.Sprites
             runSoundInstace = runSound.CreateInstance();
             jumpSound = Game1._content.Load<SoundEffect>("Sounds/jump");
             dieSound = Game1._content.Load<SoundEffect>("Sounds/lose");
+
+
+            // Carregar textura do projétil
+            bulletTexture = Game1._content.Load<Texture2D>("Sprites/Bullet");
+            bullets = new List<Bullet>();
         }
 
         /// <summary>
@@ -184,6 +195,9 @@ namespace TDJD_Projeto2.Scripts.Sprites
         /// </summary>
         public async void Update()
         {
+            previousMouseState = currentMouseState;
+            currentMouseState = Mouse.GetState();
+
             PressKey();
 
             Vector2 previousPosition = Position;
@@ -211,7 +225,39 @@ namespace TDJD_Projeto2.Scripts.Sprites
             }
 
             ResetPhysicsApplied();
+
+            // Verificar clique do rato e disparar
+            if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+            {
+                Shoot();
+            }
+
+            // Atualizar projéteis
+            float elapsedTime = (float)Game1._gameTime.ElapsedGameTime.TotalSeconds;
+            foreach (var bullet in bullets)
+            {
+                bullet.Update(elapsedTime);
+            }
+
+            // Remover projéteis inativos
+            bullets.RemoveAll(b => !b.IsActive);
         }
+
+        private void Shoot()
+        {
+            Vector2 bulletPosition = new Vector2(Position.X, Position.Y-58); // Ajuste conforme necessário
+            Vector2 bulletVelocity = new Vector2(750f, 0f); // Ajuste conforme necessário
+
+            if (flip == SpriteEffects.FlipHorizontally)
+            {
+                bulletVelocity.X = -bulletVelocity.X;
+            }
+
+            bullets.Add(new Bullet(bulletPosition, bulletVelocity));
+        }
+
+
+
 
         /// <summary>
         /// Verifica se pressionou as teclas do movimento ou de salto
@@ -445,10 +491,17 @@ namespace TDJD_Projeto2.Scripts.Sprites
         /// <summary>
         /// Desenha o jogador
         /// </summary>
-        public void Draw()
+        public void Draw(SpriteBatch spriteBatch)
         {
             FlipPlayer();
             animator.Draw(Position, flip);
+
+            //Desenhar projeteis
+            foreach (var bullet in bullets)
+            {
+                bullet.Draw(spriteBatch, bulletTexture);
+            }
+
         }
 
         /// <summary>

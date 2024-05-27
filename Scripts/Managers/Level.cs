@@ -18,7 +18,7 @@ namespace TDJD_Projeto2.Scripts.Managers
     public class Level
     {
         #region Campos e Propriedes
-
+        
         // fundos
         private List<Image> backgrounds;
 
@@ -74,6 +74,8 @@ namespace TDJD_Projeto2.Scripts.Managers
 
         // se o nível está em pausa ou não
         private bool levelFreezed = false;
+        
+
         public bool LevelFreezed
         {
             get => levelFreezed;
@@ -351,7 +353,15 @@ namespace TDJD_Projeto2.Scripts.Managers
         /// </summary>
         private void DrawPlayer()
         {
-            player.Draw();
+            {
+                
+
+                // Desenhar o jogador
+                player.Draw(Game1._spriteBatch);
+
+                
+            }
+            
         }
 
         /// <summary>

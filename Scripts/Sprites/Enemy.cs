@@ -29,7 +29,7 @@ namespace TDJD_Projeto2.Scripts.Sprites
 
         // movimento do jogador
         private SpriteEffects flip = SpriteEffects.None;
-        public float speed = 5000f;
+        public float speed = 6000f;
         
         private bool isOnGround;
         public bool IsOnGround
