@@ -47,6 +47,7 @@ namespace TDJD_Projeto2.Scripts.Sprites
             get => isAlive;
         }
 
+        
         // posição do jogador
         private Vector2 position;
         public Vector2 Position
@@ -181,7 +182,7 @@ namespace TDJD_Projeto2.Scripts.Sprites
         /// <summary>
         /// Atualiza o jogador
         /// </summary>
-        public void Update()
+        public async void Update()
         {
             PressKey();
 
@@ -202,7 +203,9 @@ namespace TDJD_Projeto2.Scripts.Sprites
                 }
                 else
                 {
+                    
                     runSoundInstace.Stop();
+                    
                     animator.PlayAnimation(idleAnimation);
                 }
             }
