@@ -31,7 +31,7 @@ namespace TDJD_Projeto2.Scripts.Managers
 
         // inimigos e poções
         private List<Enemy> enemies = new List<Enemy>();
-        private List<Potion> potions = new List<Potion>();
+        private List<Ammo> ammo = new List<Ammo>();
 
         // mapa do nível
         private Tilemap tilemap;
@@ -176,11 +176,11 @@ namespace TDJD_Projeto2.Scripts.Managers
         }
 
         /// <summary>
-        /// Cria uma poção
+        /// Cria uma munição
         /// </summary>
-        public void CreatePotion(Rectangle tileCollider, string filename)
+        public void CreateAmmo(Rectangle tileCollider, string filename)
         {
-            potions.Add(new Potion(this, tileCollider, filename));
+            ammo.Add(new Ammo(this, tileCollider, filename));
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace TDJD_Projeto2.Scripts.Managers
         public void Update()
         {
             // serve para quando o nível estiver congelado, voltar a permitir jogar,
-            // o nível fica congelado, caso o jogador esteja morto, ou perdeu por tempo ou completo o n+ivel
+            // o nível fica congelado, caso o jogador esteja morto, ou perdeu por tempo ou completo o nivel
             // (por outras palavras o nível está congelado quando aparece uma popup) 
             if (Gameplay._keyboardManager.IsKeyPressed(Keys.Space))
             {
@@ -265,10 +265,12 @@ namespace TDJD_Projeto2.Scripts.Managers
             foreach (Enemy enemy in enemies)
             {
                 enemy.Update();
-
+                //if (enemy.Collider.Intersects(Bullet.Collider){
+                
+                //}
                 // se o jogador tocar num inimigo
                 if (enemy.Collider.Intersects(Player.Collider))
-                {
+                { 
                     player.OnPlayerDied(enemy);
                 }
             }
@@ -279,16 +281,16 @@ namespace TDJD_Projeto2.Scripts.Managers
         /// </summary>
         private void UpdatePotions()
         {
-            for (int i = 0; i < potions.Count; ++i)
+            for (int i = 0; i < ammo.Count; ++i)
             {
-                Potion potion = potions[i];
+                Ammo Ammo = ammo[i];
 
                 // se tocar numa poção
-                if (potion.Collider.Intersects(Player.Collider))
+                if (Ammo.Collider.Intersects(Player.Collider))
                 {
                     score += 1;
-                    potion.OnPotionCollected();
-                    potions.RemoveAt(i--);
+                    Ammo.OnAmmoCollected();
+                    ammo.RemoveAt(i--);
                 }
             }
         }
@@ -325,7 +327,7 @@ namespace TDJD_Projeto2.Scripts.Managers
             DrawBackground();
             DrawTilemap();
             DrawPlayer();
-            DrawPotions();
+            DrawAmmo();
             DrawEnemies();
         }
 
@@ -367,11 +369,11 @@ namespace TDJD_Projeto2.Scripts.Managers
         /// <summary>
         /// Desenha as poções
         /// </summary>
-        private void DrawPotions()
+        private void DrawAmmo()
         {
-            foreach (Potion potion in potions)
+            foreach (Ammo ammo in ammo)
             {
-                potion.Draw();
+                ammo.Draw();
             }
         }
 

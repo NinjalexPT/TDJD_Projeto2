@@ -8,7 +8,7 @@ namespace TDJD_Projeto2.Scripts.Sprites
     /// <summary>
     /// Representa uma poção que é coletada durante o jogo
     /// </summary>
-    public class Potion
+    public class Ammo
     {
         #region Campos e propriedades
 
@@ -30,7 +30,7 @@ namespace TDJD_Projeto2.Scripts.Sprites
 
         // Gets the current position of this gem in world space
         // Position in world space of the bottom center of this gem
-        // obtém o retângulo colisor da poção
+        // obtém o retângulo colisor da munição
         private Rectangle collider;
         public Rectangle Collider
         {
@@ -52,9 +52,9 @@ namespace TDJD_Projeto2.Scripts.Sprites
         #region Carregar
 
         /// <summary>
-        /// Controis uma nova poção
+        /// Controis uma nova munição
         /// </summary>
-        public Potion(Level level, Rectangle collider, string filename)
+        public Ammo(Level level, Rectangle collider, string filename)
         {
             this.level = level;
             this.collider = collider;
@@ -64,18 +64,18 @@ namespace TDJD_Projeto2.Scripts.Sprites
         }
 
         /// <summary>
-        /// Carrega o conteúdo para a poção
+        /// Carrega o conteúdo para a munição
         /// </summary>
         public void LoadContent(string filename)
         {
             texture = Game1._content.Load<Texture2D>("Tiles/" + filename);
-            collectedSound = Game1._content.Load<SoundEffect>("Sounds/collectpotion");
+            collectedSound = Game1._content.Load<SoundEffect>("Sounds/collectAmmo");
         }
 
         /// <summary>
-        /// Toca o som, quando a poção é coletada
+        /// Toca o som, quando a munição é coletada
         /// </summary>
-        public void OnPotionCollected()
+        public void OnAmmoCollected()
         {
             collectedSound.Play();
         }
@@ -86,7 +86,7 @@ namespace TDJD_Projeto2.Scripts.Sprites
         #region Desenhar
 
         /// <summary>
-        /// Desenhar a poção
+        /// Desenhar a munição
         /// </summary>
         public void Draw()
         {

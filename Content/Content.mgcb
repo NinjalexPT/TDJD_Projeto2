@@ -172,11 +172,11 @@
 /processorParam:Quality=Best
 /build:Sounds/clickbutton.wav
 
-#begin Sounds/collectpotion.wav
+#begin Sounds/collectAmmo.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/collectpotion.wav
+/build:Sounds/collectAmmo.wav
 
 #begin Sounds/jump.wav
 /importer:WavImporter

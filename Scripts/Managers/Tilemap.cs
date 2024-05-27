@@ -138,7 +138,7 @@ namespace TDJD_Projeto2.Scripts.Managers
                 // preenche com poção
 
                 case 'P': // azul
-                    level.CreatePotion(GetTileCollider(x, y), "P");
+                    level.CreateAmmo(GetTileCollider(x, y), "P");
                     return NewEmptyTile(CollisionType.transparent);
 ;
 
