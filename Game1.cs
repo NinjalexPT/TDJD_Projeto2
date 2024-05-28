@@ -1,52 +1,98 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using TDJD_Projeto2.Scripts.Scenes;
+using TDJD_Projeto2.Scripts.Utils;
 
 namespace TDJD_Projeto2
 {
+    
     public class Game1 : Game
     {
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
+        #region Campos e propriedades
+
+        // recursos padrão do monogame para criar os gráficos do jogo
+        private GraphicsDeviceManager graphics;
+
+        // variáveis globais
+        public static int _screenWidth = 1024;
+        public static int _screenHeight = 640;
+        public static Point _screenCenter = new Point(_screenWidth / 2, _screenHeight / 2);
+
+        public static GraphicsDevice _graphicsDevice;
+        public static ContentManager _content;
+        public static SpriteBatch _spriteBatch;
+        public static GameTime _gameTime;
+
+        // estado da cena atual
+        public static SceneType _currentSceneType;
+        public static Scene _currentScene;
+
+        #endregion
+
+
+        #region Carregar jogo
 
         public Game1()
         {
-            _graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            graphics = new GraphicsDeviceManager(this);
+            graphics.IsFullScreen = false;
+
+            _content = Content;
+            _content.RootDirectory = "Content";
+
             IsMouseVisible = true;
         }
 
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            graphics.PreferredBackBufferWidth = _screenWidth;
+            graphics.PreferredBackBufferHeight = _screenHeight;
+            graphics.ApplyChanges();
 
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
+            // permite que sejam desenhadas texturas no ecrã
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _graphicsDevice = GraphicsDevice;
 
-            // TODO: use this.Content to load your game content here
+            // primeira cena aparecer
+            _currentSceneType = SceneType.MainMenu;
+            _currentScene = new MainMenu(this);
         }
+
+        #endregion
+
+
+        #region Atualizar jogo
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            _gameTime = gameTime;
+            _currentScene.Update();
 
-            // TODO: Add your update logic here
-
-            base.Update(gameTime);
+            base.Update(_gameTime);
         }
+
+        #endregion
+
+
+        #region Desenhar jogo
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            // cor padrão do ecrã
+            GraphicsDevice.Clear(Color.Black);
 
-            // TODO: Add your drawing code here
+            _gameTime = gameTime;
+            _currentScene.Draw();
 
-            base.Draw(gameTime);
+            base.Draw(_gameTime);
         }
+
+        #endregion
     }
 }
