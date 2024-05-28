@@ -1,18 +1,26 @@
 # TDJD_Projeto2
-TO DO
-cenario: pos apocaliptico/futuristico
-genero: sidescroller platformer
+## Jogo platformer "Supply run"
+![logomenu](https://github.com/NinjalexPT/TDJD_Projeto2/assets/150021868/20d6aacc-1226-42e6-a884-d9c4d5897a58)
 
-implementar mapa
+Jogo desenvolvido no framework "Monogame" baseado no jogo: https://github.com/MonoGame/MonoGame.Samples
 
-implementar personagem e colisoes (estilo aventureiro errante com braço metálico)
+# Resumo do jogo
 
-implementar movimento
+> inicialmente tinhamos a ideia de colocar um boss final na terceira fase porem acabamos por mudar de ideias e o jogador agora meramente tem que completar cada nivel antes que o tempo termine.
+O jogador começa sem munição e vai coletando porém devido á horda que se aproxima ele apenas consegue carregar o carregador na arma.
 
-implementar ataques
+AD / SETAS ESQ e DIR - Movimento para a esquerda e direita respetivamente
 
-implementar mudanças de fase
+clique no botao esquerdo do rato (M1) o jogador dispara
+O jogo tem 3 fases porem é possivel adicionar mais indefenidamente.
 
-implementar inimigos
+### Desenvolvido por
+Miguel Silva
+Hugo Oliveira
+Samuel Furtado
 
-implementar boss final
+### Contribuições
+https://pixabay.com/pt/ - Pixabay
+> audios utilizados no jogo
+
+> o popup usado quando o jogador morre é retirado do jogo fallout 2 da franquia com o mesmo nome
