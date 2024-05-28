@@ -20,7 +20,7 @@ namespace TDJD_Projeto2.Scripts.Sprites
         #region Campos e propriedes
 
         public List<Bullet> Bullets => bullets.Where(b => b.IsActive).ToList();
-        public bool canshoot { get; set; } = false;
+        public bool canshoot { get; set; } = true;
         private Texture2D bulletTexture;
         private List<Bullet> bullets;
         public MouseState currentMouseState;
@@ -253,7 +253,7 @@ namespace TDJD_Projeto2.Scripts.Sprites
             // Define a posição inicial e a velocidade da bala
             Vector2 bulletPosition = new Vector2(Position.X + (flip == SpriteEffects.None ? 1 : -1) * 20, Position.Y-58);
             Vector2 bulletVelocity = new Vector2(flip == SpriteEffects.None ? 500 : -500, 0);
-            Bullet newBullet = new Bullet(bulletPosition, bulletVelocity, bulletTexture);
+            Bullet newBullet = new Bullet(level,bulletPosition, bulletVelocity, bulletTexture);
             shootsound.Play();
             bullets.Add(newBullet);
         }

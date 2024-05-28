@@ -92,10 +92,10 @@ namespace TDJD_Projeto2.Scripts.Managers
         /// <summary>
         /// Constroi o nível atual
         /// </summary>
-        public Level(Stream fileStream, int levelIndex, int seconds, int currentScore)
+        public Level(Stream fileStream, int levelIndex, int seconds, int currentammo)
         {
             SetInitialTime(seconds);
-            SetCurrentScore(currentScore);
+            SetCurrentammo(currentammo);
             LoadContent(fileStream, levelIndex);
         }
 
@@ -111,11 +111,11 @@ namespace TDJD_Projeto2.Scripts.Managers
         /// <summary>
         /// Define o atual a pontuação para o nível atual
         /// </summary>
-        private void SetCurrentScore(int currentammo)
+        private void SetCurrentammo(int currentammo)
         {
             Ammos = currentammo;
         }
-
+        
         /// <summary>
         /// Carrega o conteúdo para o nível
         /// </summary>
@@ -258,6 +258,13 @@ namespace TDJD_Projeto2.Scripts.Managers
         {
             
             Player.Update();
+            foreach (Bullet bullet in player.Bullets)
+            {
+                if (bullet.Collider.Intersects(Tilemap.GetTileCollider((int)bullet.Position.X, (int)bullet.Position.Y)))
+                {
+                bullet.IsActive = false;
+                };
+            }
         }
 
         /// <summary>
@@ -397,12 +404,10 @@ namespace TDJD_Projeto2.Scripts.Managers
         private void DrawPlayer()
         {
             {
-                
 
                 // Desenhar o jogador
                 player.Draw(Game1._spriteBatch);
 
-                
             }
             
         }

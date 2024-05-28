@@ -94,7 +94,7 @@ namespace TDJD_Projeto2.Scripts.Scenes
                 Game1._currentScene = new Storyboard(game, storyboards, nextSceneType, nextScene);
 
                 levelIndex = -1;
-                currentAmmo = 7;
+                
             }
 
             // índice do próximo nível
@@ -150,6 +150,7 @@ namespace TDJD_Projeto2.Scripts.Scenes
                     {
                         LoadNextLevel();
                     }
+                    else { level.StartNewLife(); }
                 }
             }
             wasPlaying = isPlaying;

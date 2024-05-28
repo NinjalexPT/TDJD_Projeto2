@@ -23,6 +23,8 @@ namespace TDJD_Projeto2.Scripts.Managers
         // e o segundo o número de linhas
         public Tile[,] grid;
 
+        private List<Rectangle> solidBlocks;
+
         // comprimento do nível medido pelo tilemap
         public int Width
         {
@@ -47,6 +49,8 @@ namespace TDJD_Projeto2.Scripts.Managers
         {
             this.level = level;
             List<string> fileLines = GetFileLines(fileStream);
+            solidBlocks = new List<Rectangle>();
+
 
             CreateEmptyTilemap(fileLines);
             LoadTilemap(fileLines);
@@ -126,9 +130,13 @@ namespace TDJD_Projeto2.Scripts.Managers
                 // preenche com tile do tipo bloco
 
                 case 'T':
-                    return NewTile("Tiles/T", CollisionType.block);
+                    
+                    
                 case 'E':
-                    return NewTile("Tiles/E", CollisionType.block);
+                    Tile tile = NewTile($"Tiles/{tileType}", CollisionType.block);
+                    solidBlocks.Add(GetTileCollider(x, y));
+                    return tile;
+
 
                 // preenche com inimigo
                 case 'V':
@@ -205,6 +213,18 @@ namespace TDJD_Projeto2.Scripts.Managers
             }
 
             return grid[x, y].type;
+        }
+
+        public bool IsSolidTile(Rectangle collider)
+        {
+            foreach (var block in solidBlocks)
+            {
+                if (collider.Intersects(block))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         #endregion

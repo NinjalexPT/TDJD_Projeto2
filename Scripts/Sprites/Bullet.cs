@@ -14,13 +14,15 @@ namespace TDJD_Projeto2.Scripts.Sprites
 {
     public class Bullet
     {
+        private Level level;
         public Vector2 Position;
         public Vector2 Velocity;
         public bool IsActive;
         private Texture2D texture;
         private float lifeTime = 1.0f;
-        public Bullet(Vector2 position, Vector2 velocity, Texture2D texture)
+        public Bullet(Level level, Vector2 position, Vector2 velocity, Texture2D texture)
         {
+            this.level = level;
             Position = position;
             Velocity = velocity;
             IsActive = true;
@@ -40,10 +42,18 @@ namespace TDJD_Projeto2.Scripts.Sprites
             Position += Velocity * elapsedTime;
 
             lifeTime -= elapsedTime;
-            
 
+            if (level.Tilemap.IsSolidTile(Collider))
+            {
+                IsActive = false;
+            }
 
-            // Desativar a bala se o tempo de vida expirar
+            if (Position.X < 0 || Position.X > level.Tilemap.Width * Tile.WIDTH || Position.Y < 0 || Position.Y > level.Tilemap.Height * Tile.HEIGHT)
+            {
+                IsActive = false;
+            }
+
+             //Desativar a bala se o tempo de vida expirar
             if (lifeTime <= 0)
             {
                 IsActive = false;
