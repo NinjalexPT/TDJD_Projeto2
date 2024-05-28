@@ -13,6 +13,15 @@ AD / SETAS ESQ e DIR - Movimento para a esquerda e direita respetivamente
 
 clique no botao esquerdo do rato (M1) o jogador dispara
 O jogo tem 3 fases porem é possivel adicionar mais indefenidamente.
+## Propriedades
+Inimigos com movimento
+coletaveis (munição)
+Arma funcional
+Movimento do jogador
+construção do mapa
+Efeitos sonoros
+
+> existe um erro quando começa um novo nivel que o jogador fica com munição infinita até coletar mais munição
 
 ### Desenvolvido por
 Miguel Silva
