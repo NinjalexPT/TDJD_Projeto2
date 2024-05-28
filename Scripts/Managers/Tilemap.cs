@@ -135,9 +135,9 @@ namespace TDJD_Projeto2.Scripts.Managers
                     level.CreateEnemy(GetTileCollider(x, y), "Enemy");
                     return NewEmptyTile(CollisionType.transparent);
 
-                // preenche com poção
+                // preenche com muniçáo
 
-                case 'P': // azul
+                case 'P': // Pistola
                     level.CreateAmmo(GetTileCollider(x, y), "P");
                     return NewEmptyTile(CollisionType.transparent);
 ;

@@ -20,6 +20,8 @@ namespace TDJD_Projeto2.Scripts.Sprites
         {
             get => level;
         }
+
+        private const float GRAVITY = 3400f;
         private Vector2 velocity;
         public Vector2 Velocity
         {
@@ -30,7 +32,8 @@ namespace TDJD_Projeto2.Scripts.Sprites
         // movimento do jogador
         private SpriteEffects flip = SpriteEffects.None;
         public float speed = 6000f;
-        
+        public bool IsActive = true;
+
         private bool isOnGround;
         public bool IsOnGround
         {
@@ -71,7 +74,10 @@ namespace TDJD_Projeto2.Scripts.Sprites
             // aplica o movimento para a direita ou esquerda
             velocity.X = speed * elapsedTime;
 
-           
+            // aplica o movimento para cima
+            // e previne que o salto tenha uma velocidade máxima e mínima
+            //velocity.Y = velocity.Y + GRAVITY * elapsedTime;
+            
 
             // atualiza a posição do inimigo
             position += velocity * elapsedTime;
@@ -248,8 +254,11 @@ namespace TDJD_Projeto2.Scripts.Sprites
         }
         public void Draw()
         {
-            FlipEnemy();
-            animator.Draw(Position, flip);
+            if (IsActive)
+            {
+                FlipEnemy();
+                animator.Draw(Position, flip);
+            }
         }
 
         #endregion

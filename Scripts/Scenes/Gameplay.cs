@@ -31,7 +31,7 @@ namespace TDJD_Projeto2.Scripts.Scenes
         private static Camera camera;
 
         // guardar a pontuação atual do nível atual (é progressiva, ou seja permanece de nível para nível)
-        private int currentScore;
+        private int currentAmmo;
 
         #endregion
 
@@ -94,7 +94,7 @@ namespace TDJD_Projeto2.Scripts.Scenes
                 Game1._currentScene = new Storyboard(game, storyboards, nextSceneType, nextScene);
 
                 levelIndex = -1;
-                currentScore = 0;
+                currentAmmo = 7;
             }
 
             // índice do próximo nível
@@ -103,7 +103,7 @@ namespace TDJD_Projeto2.Scripts.Scenes
 
             if (level != null)
             {
-                currentScore = level.Score;
+                currentAmmo = level.Ammonition;
             }
 
             // carrega o nivel
@@ -111,15 +111,15 @@ namespace TDJD_Projeto2.Scripts.Scenes
             {
                 if (levelIndex == 0)
                 {
-                    level = new Level(fileStream, levelIndex, 120, currentScore);
+                    level = new Level(fileStream, levelIndex, 120, currentAmmo);
                 }
                 else if (levelIndex == 1)
                 {
-                    level = new Level(fileStream, levelIndex, 180, currentScore);
+                    level = new Level(fileStream, levelIndex, 180, currentAmmo);
                 }
                 else if (levelIndex == 2)
                 {
-                    level = new Level(fileStream, levelIndex, 240, currentScore);
+                    level = new Level(fileStream, levelIndex, 240, currentAmmo);
                 }
             }
         }
@@ -224,8 +224,8 @@ namespace TDJD_Projeto2.Scripts.Scenes
                 level.CurrentTime.Minutes.ToString("00") + ":" +
                 level.CurrentTime.Seconds.ToString("00");
 
-            string scoreText = "SCORE: " +
-                level.Score.ToString();
+            string scoreText = "AMMO: " +
+                level.Ammonition.ToString();
 
             int xPosition = (int)camera.Center.X - 500;//1120 1024 464
 

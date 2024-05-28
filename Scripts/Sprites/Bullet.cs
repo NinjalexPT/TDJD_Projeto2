@@ -17,38 +17,37 @@ namespace TDJD_Projeto2.Scripts.Sprites
         public Vector2 Position;
         public Vector2 Velocity;
         public bool IsActive;
-        private Animator animator;
-        public Bullet(Vector2 position, Vector2 velocity)
+        private Texture2D texture;
+        private float lifeTime = 1.0f;
+        public Bullet(Vector2 position, Vector2 velocity, Texture2D texture)
         {
             Position = position;
             Velocity = velocity;
             IsActive = true;
+            this.texture = texture;
         }
-        // limites (bordas) da textura
-        private Rectangle textureBounds;
+
         // obtém o retângulo colisor do jogador através dos limites da textura
         public Rectangle Collider
         {
             get
             {
-                int left = (int)(Position.X - animator.Origin.X) + textureBounds.X;
-                int top = (int)(Position.Y - animator.Origin.Y) + textureBounds.Y;
-                int right = textureBounds.Width;
-                int bottom = textureBounds.Height;
-
-                return new Rectangle(left, top, right, bottom);
+                return new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
             }
         }
         public void Update(float elapsedTime)
         {
             Position += Velocity * elapsedTime;
+
+            lifeTime -= elapsedTime;
             
-            // Desativar o projétil se sair da tela (ajuste conforme necessário)
-            /*if (Position.X < 0 || Position.X > Game1.graphics.PreferredBackBufferWidth ||
-            Position.Y < 0 || Position.Y > Game1.graphics.PreferredBackBufferHeight)
+
+
+            // Desativar a bala se o tempo de vida expirar
+            if (lifeTime <= 0)
             {
                 IsActive = false;
-            }*/
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch, Texture2D texture)

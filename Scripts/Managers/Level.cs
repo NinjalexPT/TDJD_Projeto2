@@ -28,6 +28,8 @@ namespace TDJD_Projeto2.Scripts.Managers
         {
             get => player;
         }
+ 
+
 
         // inimigos e poções
         private List<Enemy> enemies = new List<Enemy>();
@@ -65,11 +67,11 @@ namespace TDJD_Projeto2.Scripts.Managers
             set => currentTime = value;
         }
 
-        // pontuação do respetivo nível
-        private int score;
-        public int Score
+        // munnição do respetivo nível (de modo a passar a mesma para o nivel seguinte)
+        private int Ammos = 10;
+        public int Ammonition
         {
-            get => score;
+            get => Ammos;
         }
 
         // se o nível está em pausa ou não
@@ -109,9 +111,9 @@ namespace TDJD_Projeto2.Scripts.Managers
         /// <summary>
         /// Define o atual a pontuação para o nível atual
         /// </summary>
-        private void SetCurrentScore(int currentScore)
+        private void SetCurrentScore(int currentammo)
         {
-            score = currentScore;
+            Ammos = currentammo;
         }
 
         /// <summary>
@@ -216,7 +218,7 @@ namespace TDJD_Projeto2.Scripts.Managers
                 {
                     DecrementTime();
                     UpdatePlayer();
-                    UpdatePotions();
+                    UpdateAmmo();
                     UpdateEnemies();
 
                     // se o jogador está a tocar no tile de fim do nível (no centro do limite inferior)
@@ -254,6 +256,7 @@ namespace TDJD_Projeto2.Scripts.Managers
         /// </summary>
         private void UpdatePlayer()
         {
+            
             Player.Update();
         }
 
@@ -262,35 +265,73 @@ namespace TDJD_Projeto2.Scripts.Managers
         /// </summary>
         private void UpdateEnemies()
         {
+
+            // Usar uma lista temporária para armazenar inimigos ativos
+            List<Enemy> activeEnemies = new List<Enemy>();
+
             foreach (Enemy enemy in enemies)
             {
                 enemy.Update();
-                //if (enemy.Collider.Intersects(Bullet.Collider){
                 
-                //}
-                // se o jogador tocar num inimigo
+                // se uma bala acertar no inimigo
+                foreach (Bullet bullet in player.Bullets)
+                {
+                    if (enemy.Collider.Intersects(bullet.Collider))
+                    {
+                        enemy.IsActive = false; // ou outro mecanismo para remover/desativar o inimigo
+                        bullet.IsActive = false; // Desativar a bala
+                        break; // Exit the bullet loop if a collision is detected
+                    }
+                }   
+
+
                 if (enemy.Collider.Intersects(Player.Collider))
                 { 
                     player.OnPlayerDied(enemy);
                 }
+
+                if (enemy.IsActive)
+                {
+                    activeEnemies.Add(enemy);
+                }
+
+                enemies = activeEnemies;
             }
         }
 
         /// <summary>
-        /// Atualiza as poções, para coletá-las
+        /// Atualiza as munições, para coletá-las e verificar se o jogador ainda tem munição
         /// </summary>
-        private void UpdatePotions()
+        private void UpdateAmmo()
         {
+   
             for (int i = 0; i < ammo.Count; ++i)
             {
                 Ammo Ammo = ammo[i];
 
-                // se tocar numa poção
+                // se tocar numa munição
                 if (Ammo.Collider.Intersects(Player.Collider))
                 {
-                    score += 1;
+                    Ammos = 10;
                     Ammo.OnAmmoCollected();
                     ammo.RemoveAt(i--);
+                    player.canshoot = true;
+
+                }
+
+            }
+            // Verificar se o jogador dispara
+            if (player.currentMouseState.LeftButton == ButtonState.Pressed && player.previousMouseState.LeftButton == ButtonState.Released)
+            {
+                if (Ammos > 0 && player.canshoot)
+                {
+                    Ammos = Ammos - 1;
+                    player.canshoot = true;
+                    // Se a munição acabar, definir canshoot como falso
+                    if (Ammos <= 0)
+                    {
+                        player.canshoot = false;
+                    }
                 }
             }
         }

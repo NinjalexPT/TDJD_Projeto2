@@ -8,6 +8,7 @@ using TDJD_Projeto2.Scripts.Scenes;
 using TDJD_Projeto2.Scripts.Utils;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TDJD_Projeto2.Scripts.Sprites
 {
@@ -18,10 +19,12 @@ namespace TDJD_Projeto2.Scripts.Sprites
     {
         #region Campos e propriedes
 
+        public List<Bullet> Bullets => bullets.Where(b => b.IsActive).ToList();
+        public bool canshoot { get; set; } = false;
         private Texture2D bulletTexture;
         private List<Bullet> bullets;
-        private MouseState currentMouseState;
-        private MouseState previousMouseState;
+        public MouseState currentMouseState;
+        public MouseState previousMouseState;
 
         // o nível atual
         public Level Level
@@ -45,6 +48,7 @@ namespace TDJD_Projeto2.Scripts.Sprites
         private SoundEffectInstance runSoundInstace;
         private SoundEffect jumpSound;
         private SoundEffect dieSound;
+        private SoundEffect shootsound;
 
         // se o jogador está vivo ou não
         private bool isAlive;
@@ -151,7 +155,7 @@ namespace TDJD_Projeto2.Scripts.Sprites
             runSoundInstace = runSound.CreateInstance();
             jumpSound = Game1._content.Load<SoundEffect>("Sounds/jump");
             dieSound = Game1._content.Load<SoundEffect>("Sounds/lose");
-
+            shootsound = Game1._content.Load<SoundEffect>("Sounds/shoot");
 
             // Carregar textura do projétil
             bulletTexture = Game1._content.Load<Texture2D>("Sprites/Bullet");
@@ -227,8 +231,9 @@ namespace TDJD_Projeto2.Scripts.Sprites
             ResetPhysicsApplied();
 
             // Verificar clique do rato e disparar
-            if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+            if (currentMouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released && canshoot)
             {
+                
                 Shoot();
             }
 
@@ -245,15 +250,12 @@ namespace TDJD_Projeto2.Scripts.Sprites
 
         private void Shoot()
         {
-            Vector2 bulletPosition = new Vector2(Position.X, Position.Y-58); // Ajuste conforme necessário
-            Vector2 bulletVelocity = new Vector2(750f, 0f); // Ajuste conforme necessário
-
-            if (flip == SpriteEffects.FlipHorizontally)
-            {
-                bulletVelocity.X = -bulletVelocity.X;
-            }
-
-            bullets.Add(new Bullet(bulletPosition, bulletVelocity));
+            // Define a posição inicial e a velocidade da bala
+            Vector2 bulletPosition = new Vector2(Position.X + (flip == SpriteEffects.None ? 1 : -1) * 20, Position.Y-58);
+            Vector2 bulletVelocity = new Vector2(flip == SpriteEffects.None ? 500 : -500, 0);
+            Bullet newBullet = new Bullet(bulletPosition, bulletVelocity, bulletTexture);
+            shootsound.Play();
+            bullets.Add(newBullet);
         }
 
 
