@@ -55,7 +55,8 @@ namespace TDJD_Projeto2.Scripts.Managers
 
         // som quando completa o nível
         private SoundEffect completedLevelSound;
-
+        //som de quando morre o inimigo
+        private SoundEffect zombieSound;
         // tempo máximo do nível
         private TimeSpan fullTime;
 
@@ -132,6 +133,7 @@ namespace TDJD_Projeto2.Scripts.Managers
         private void LoadSounds()
         {
             completedLevelSound = Game1._content.Load<SoundEffect>("Sounds/win");
+            zombieSound = Game1._content.Load<SoundEffect>("Sounds/enemydeath");
         }
 
         /// <summary>
@@ -285,6 +287,7 @@ namespace TDJD_Projeto2.Scripts.Managers
                 {
                     if (enemy.Collider.Intersects(bullet.Collider))
                     {
+                        zombieSound.Play();
                         enemy.IsActive = false; // ou outro mecanismo para remover/desativar o inimigo
                         bullet.IsActive = false; // Desativar a bala
                         break; // Exit the bullet loop if a collision is detected

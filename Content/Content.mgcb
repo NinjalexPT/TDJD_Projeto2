@@ -178,6 +178,12 @@
 /processorParam:Quality=Best
 /build:Sounds/collectAmmo.wav
 
+#begin Sounds/enemydeath.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/enemydeath.wav
+
 #begin Sounds/jump.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
