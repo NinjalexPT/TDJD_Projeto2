@@ -6,7 +6,7 @@ using TDJD_Projeto2.Scripts.Managers;
 namespace TDJD_Projeto2.Scripts.Sprites
 {
     /// <summary>
-    /// Representa uma poção que é coletada durante o jogo
+    /// Representa uma munição que é coletada durante o jogo
     /// </summary>
     public class Ammo
     {
